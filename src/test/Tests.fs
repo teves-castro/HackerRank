@@ -1,32 +1,24 @@
-module Hacker
+module Tests
 
-open NUnit.Framework
-open FsUnit
+open Expecto
 open Hacker
 open Problems
 open Recursion
 open DynamicProgramming
 
-[<Test>]
-let ``Example Test`` () =
-    1 |> should equal 1
+[<Tests>]
+let tests =
+  testList "samples" [
+    testCase "universe exists" <| fun _ ->
+      let subject = true
+      Expect.isTrue subject "I compute, therefore I am."
 
-[<Test>]
-let ``Maximum Sub Array`` () =
-    [|
-        "3";
-        "4";
-        "1 2 3 4";
-        "6";
-        "2 -3 2 3 4 -5";
-        "4"
-        "-1 2 -3 -4";
-    |]
-    |> hacker maximumSubArray
-    |> should equal [|"10 10"; "9 11"; "2 2"; ""|]
+    testCase "Maximum Sub Array" <| fun _ ->
+      let subject = [| "3"; "4"; "1 2 3 4"; "6"; "2 -3 2 3 4 -5"; "4"; "-1 2 -3 -4"|] |> hacker maximumSubArray
+      Expect.containsAll subject [|"10 10"; "9 11"; "2 2"; ""|] "Failed"
 
-// [<Test>]
-// let ``Fibonacci Modified`` () =
-//     [|"2 2 20"|]
-//     |> hacker fibonacciModified
-//     |> should equal [|"10 10"; "9 11"; "2 2"; ""|]
+    testCase "should fail" <| fun _ ->
+      let subject = false
+      Expect.isTrue subject "I should fail because the subject is false."
+
+  ]
