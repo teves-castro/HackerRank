@@ -21,7 +21,7 @@ let sansaAndXOR () =
     let cases = readInt ()
     [1..cases]
     |> Seq.map (readInt >> ignore >> readIntArray >> solve)
-    |> Seq.iter (printfn "%d")
+    |> Seq.iter (sprintf "%d" >> writeLine)
 
 
 // Maximizing XOR
@@ -30,7 +30,7 @@ let maximizeXOR () =
     seq { for a in [ l..r ] do for b in [ a..r ] -> a , b }
     |> Seq.map (fun (a,b) -> a ^^^ b) |> Seq.toList
     |> Seq.max
-    |> Console.WriteLine
+    |> writeLine
 
 // [|
 //     "10";
@@ -59,4 +59,4 @@ let counterGame () =
 
     [1..numberOfCases]
     |> List.map (readBigint >> solve >> (fun t -> if t % 2 = 0 then "Richard" else "Louise")) 
-    |> List.iter (printfn "%s")
+    |> List.iter (sprintf "%s" >> writeLine)

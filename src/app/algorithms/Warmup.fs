@@ -15,12 +15,12 @@ let compareTriplets () =
                         | a, b when a > b -> sa+1, sb
                         | a, b when a < b -> sa, sb+1
                         | _ -> sa, sb) (0,0)
-    printfn "%d %d" sa sb
+    sprintf "%d %d" sa sb |> writeLine
 
 // Simple Array Sum
 let simpleArraySum() =
     readLine() |> ignore
-    readIntArray() |> Array.sum |> Console.WriteLine
+    readIntArray() |> Array.sum |> writeLine
 
 // [|
 //  "6";
@@ -38,7 +38,7 @@ let diagonalDifference() =
         ||> (Seq.sum)
 
     let diff = Math.Abs(fstDiag - sndDiag)
-    printfn "%d" diff
+    sprintf "%d" diff |> writeLine
 // [|
 //  "3";
 //  "11 2 4";
@@ -70,7 +70,7 @@ let plusMinus() =
         |> Seq.length
         |> float
 
-    printfn "%.3f\n%.3f\n%.3f\n" (positive / count) (negative / count) (zero / count)
+    sprintf "%.3f\n%.3f\n%.3f\n" (positive / count) (negative / count) (zero / count) |> writeLine
 
 // [|
 //  "6";
@@ -83,10 +83,10 @@ let staircase() =
     let height = readInt() - 1
     for i in 0..height do
         for j in i + 1..height do
-            printf " "
+            write " "
         for j in 0..i do
-            printf "#"
-        printfn ""
+            write "#"
+        write ""
 
 // [| "6" |] |> hacker staircase
 
@@ -94,6 +94,6 @@ let staircase() =
 // Time Conversion
 let timeConversion() =
     let time = readLine()
-    printfn "%s" (DateTime.Parse(time).ToString("HH:mm:ss"))
+    sprintf "%s" (DateTime.Parse(time).ToString("HH:mm:ss")) |> writeLine
 
 // [| "07:05:45PM" |] |> hacker timeConversion

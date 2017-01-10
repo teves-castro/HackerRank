@@ -30,7 +30,8 @@ let clinics () =
     distribute populationByCity spareClinics
     |> Seq.map target
     |> Seq.head
-    |> printfn "%d"
+    |> sprintf "%d"
+    |> writeLine
 
 
 let clinics' () =
@@ -46,8 +47,10 @@ let clinics' () =
 
     let populationByCity =
         populationByCity'
-        |> List.map (fun p -> p, totalClinics * p / totalPopulation)
-        |> List.map (fun (p, c) -> if c>0 then p,c else p,1)                 // At least one clinic by city, this might over allocate clinics
+        |> List.map (
+            (fun p -> p, totalClinics * p / totalPopulation) >> 
+            (fun (p, c) -> if c>0 then p,c else p,1)
+        )                 // At least one clinic by city, this might over allocate clinics
 
     let spareClinics = totalClinics - (populationByCity |> List.map snd |> List.sum)
 
@@ -64,7 +67,8 @@ let clinics' () =
     distribute populationByCity spareClinics
     |> Seq.map (fun (p,c) -> p/c)
     |> Seq.head
-    |> printfn "%d %d" spareClinics
+    |> sprintf "%d %d" spareClinics
+    |> writeLine
 
 let clinics'' () =
     let data = readIntArray ()
@@ -83,8 +87,10 @@ let clinics'' () =
 
     let clinicsByCity =
         populationByCity
-        |> List.map (fun p -> totalClinics * p / totalPopulation)
-        |> List.map (fun c -> if c>0 then c else 1)                 // At least one clinic by city, this might over allocate clinics
+        |> List.map (
+            (fun p -> totalClinics * p / totalPopulation) >>
+            (fun c -> if c>0 then c else 1)
+        )             // At least one clinic by city, this might over allocate clinics
 
     let spareClinics = totalClinics - (clinicsByCity |> List.sum)
 
@@ -116,7 +122,7 @@ let clinics'' () =
 
     let adjusted = adjust clinicsByCity spareClinics 0
 
-    printfn "%A" (maxRequiredKits clinicsByCity)
+    sprintf "%A" (maxRequiredKits clinicsByCity) |> writeLine
 
 // [|
 //     "6 7";
@@ -148,7 +154,7 @@ let euler1 () =
     
     [1 .. readInt()]
     |> Seq.map (readInt >> uint64 >> solve ) 
-    |> Seq.iter (printfn "%d")
+    |> Seq.iter (sprintf "%d" >> writeLine)
 
 // Euler #2: Even Fibonacci numbers
 let euler2 () =
@@ -163,10 +169,12 @@ let euler2 () =
     }
 
     [1 .. readInt()]
-    |> Seq.map (readUInt64)
-    |> Seq.map (fun n -> evenFibs |> Seq.takeWhile (fun f -> f <= n))
-    |> Seq.map (Seq.fold (+) 0UL)
-    |> Seq.iter (printfn "%d")
+    |> Seq.map (
+        (readUInt64)
+        >> (fun n -> evenFibs |> Seq.takeWhile (fun f -> f <= n))
+        >> (Seq.fold (+) 0UL)
+    )
+    |> Seq.iter (sprintf "%d" >> writeLine)
 
 // Pascal
 let pascal =
@@ -195,3 +203,12 @@ let pascal1 n =
         if i <= 1UL then row::rows
         else addrow (i-1UL) (nextrow row 0UL []) (row::rows)
     addrow n [1UL] [] 
+
+let fibs = seq {
+    let rec loop f1 f2 = seq {
+        let next = f1 + f2
+        yield! loop f2 next 
+    }
+    yield 1UL;
+    yield! loop 1UL 1UL
+}

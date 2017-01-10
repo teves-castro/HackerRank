@@ -31,7 +31,7 @@ let superReducedString () =
     
     match readLine () |> Seq.toList |> loop with
     | [] -> printfn "Empty String"
-    | l -> l |> Seq.map string |> String.concat "" |> printfn "%s"
+    | l -> l |> Seq.map string |> String.concat "" |> sprintf "%s" |> writeLine
 
 
 // Camel Case
@@ -80,10 +80,10 @@ let morganAndAString () =
                         solve' ai (bi+1) (b::acum)
 
         let result = solve' 0 0 []
-        printfn "%d" !recursion
+        !recursion |> sprintf "%d" |> writeLine
         result
 
-    let printCol s = System.String(s |> Seq.toArray) |> Console.WriteLine
+    let printCol s = System.String(s |> Seq.toArray) |> writeLine
 
     let n = readInt()
     for i in 0..n - 1 do

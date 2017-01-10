@@ -15,7 +15,7 @@ let fibonacciModified () =
         yield! fibs b current
     }
 
-    Console.WriteLine (fibs f1 f2 |> Seq.skip (n-3) |> Seq.head)
+    fibs f1 f2 |> Seq.skip (n-3) |> Seq.head |> writeLine
 
 // [|"2 2 20"|] |> hacker fibonacciModified
 
@@ -42,4 +42,4 @@ let maximumSubArray () =
                     let newBs = bs + if i>0 then i else 0
                     newCs, newCsi, newCi, newBcs, newBsi, newBei, newBs
                 ) (0, -1, -1, 0, -1, -1, 0)
-        printfn "%d %d" bestContSum bestSum
+        sprintf "%d %d" bestContSum bestSum |> writeLine

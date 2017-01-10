@@ -4,28 +4,36 @@ open System
 open System.IO
 open System.Text
 
+let mutable readLine = Console.ReadLine
+let mutable writeLine  = fun (o : obj) -> printfn "%A" o
+let mutable write  = fun (o : obj) -> printf "%A" o
+
 let hacker problem input =
     let text = input |> Seq.fold (fun s l -> s + l + "\n") "" 
 
     let reader = new StringReader(text)
-    Console.SetIn reader
+
+    readLine <- reader.ReadLine
 
     let sb = new StringBuilder ()
     let writer = new StringWriter(sb)
-    Console.SetOut writer
+
+    writeLine <- writer.WriteLine
+    write <- writer.Write
+
+    // Console.SetOut writer
 
     problem ()
 
     sb.ToString().Split('\n')
 
-let readLine = Console.ReadLine
 
 let readInt _ = readLine () |> int
-let readUInt64 _ = readLine() |> uint64
-let readBigint _ = readLine() |> bigint.Parse
+let readUInt64 _ = readLine () |> uint64
+let readBigint _ = readLine () |> bigint.Parse
 
 let readIntArray() =
-    let line = readLine()
+    let line = readLine ()
     line.Split(' ') |> Array.map int
 
 let readIntSquareMatrix() =
