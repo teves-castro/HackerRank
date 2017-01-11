@@ -136,10 +136,6 @@ let clinics'' () =
 //     "700";
 // |] |> hacker clinics'
 
-
-
-
-
 // Euler #1: Multiples of 3 and 5
 let euler1 () =
     let solve n =
@@ -204,11 +200,9 @@ let pascal1 n =
         else addrow (i-1UL) (nextrow row 0UL []) (row::rows)
     addrow n [1UL] [] 
 
-let fibs = seq {
-    let rec loop f1 f2 = seq {
-        let next = f1 + f2
-        yield! loop f2 next 
+let fibs =
+    let rec fibs' f1 f2 = seq { 
+        yield f1
+        yield! fibs' f2 (f1+f2) 
     }
-    yield 1UL;
-    yield! loop 1UL 1UL
-}
+    fibs' 1I 1I
