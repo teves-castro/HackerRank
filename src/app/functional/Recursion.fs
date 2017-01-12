@@ -30,3 +30,7 @@ let pascal1 n =
         if i <= 1UL then row::rows
         else addrow (i-1UL) (nextrow row 0UL []) (row::rows)
     addrow n [1UL] [] 
+
+let sierpinski l = seq {
+    for y in [0..1008] -> '1'
+}
