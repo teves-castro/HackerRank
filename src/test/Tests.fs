@@ -22,7 +22,7 @@ let tests =
     testProperty "Add" <| fun a b ->
       a + b = b + a
 
-    testProperty "Fibonacci sequence adds subsequent elements" <| fun a ->
+    testProperty "Fibonacci sequence adds subsequent elements" <| fun a -> 
       a >= 0 ==>
       let nthfib n = fibs |> Seq.skip n |> Seq.head
       let f1 = nthfib a

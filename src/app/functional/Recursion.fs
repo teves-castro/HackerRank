@@ -32,5 +32,8 @@ let pascal1 n =
     addrow n [1UL] [] 
 
 let sierpinski l = seq {
-    for y in [0..1008] -> '1'
+    for y in [0..31] do
+        for x in [0..62] do
+            yield '1'
+        yield '\n'
 }

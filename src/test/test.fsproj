@@ -51,6 +51,7 @@
     <None Include="App.config" />
     <Compile Include="Tests.fs" />
     <Compile Include="functional/Recursion.spec.fs" />
+    <Compile Include="p2p/Addition.spec.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
