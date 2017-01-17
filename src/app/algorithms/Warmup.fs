@@ -29,7 +29,8 @@ let simpleArraySum() =
 
 // Diagonal Difference
 let diagonalDifference() =
-    let size, matrix = readIntSquareMatrix()
+    let size = readInt ()
+    let matrix = readIntMatrix size
     let ubound = size - 1
 
     let fstDiag, sndDiag =
