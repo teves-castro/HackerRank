@@ -36,11 +36,6 @@ let readIntArray() =
     let line = readLine ()
     line.Split(' ') |> Array.map int
 
-// let readIntSquareMatrix() =
-//     let size = readInt()
-//     size,
-//     [| for i in 0..(size - 1) -> readIntArray() |]
-
 let readIntMatrix lines =
     [| for i in 0..(lines - 1) -> readIntArray() |]
 
