@@ -42,7 +42,7 @@ let readIntMatrix lines =
 
 // Utils
 let split ls = ls |> Seq.map fst, ls |> Seq.map snd
-let tupleApply g t = t |> (fun (f, s) -> (f |> g, s |> g))
+let tupleApply g t = t |> fun (a1, a2) -> (g a1, g a2)
 let (||>) t g = tupleApply g t
 
 let tryHead ns =
