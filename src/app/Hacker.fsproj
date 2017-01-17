@@ -47,6 +47,7 @@
     <Compile Include="functional/Recursion.fs" />
     <None Include="packages.config" />
     <None Include="paket.references" />
+    <Compile Include="algorithms/Implementation.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Choose>
