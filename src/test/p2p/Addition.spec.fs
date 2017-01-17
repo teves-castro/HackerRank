@@ -31,6 +31,7 @@ let add = Addition.correctAdd
 [<Tests>]
 let tests =
     testList "Addition" [
+        
         testProperty "must be commutative" <| fun a b ->
             add a b = add b a
 
@@ -39,5 +40,26 @@ let tests =
 
         testProperty "must have neutral element" <| fun a ->
             add a 0 = a
-            
+
     ]
+
+type Tree = Leaf of int | Branch of Tree * Tree
+
+let tree =
+    let rec tree' s = 
+        match s with
+        | 0 -> Gen.map Leaf Arb.generate<int>
+        | n when n>0 -> 
+            let subtree = tree' (n/2)
+            Gen.oneof [ Gen.map Leaf Arb.generate<int> 
+                        Gen.map2 (fun x y -> Branch (x,y)) subtree subtree]
+        | _ -> invalidArg "s" "Only positive arguments are allowed"
+    Gen.sized tree'
+
+type MyGenerators =
+  static member Tree() =
+      {new Arbitrary<Tree>() with
+          override x.Generator = tree
+          override x.Shrinker t = Seq.empty }
+
+Arb.register<MyGenerators>() |> ignore

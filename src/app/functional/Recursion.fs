@@ -37,3 +37,8 @@ let sierpinski l = seq {
             yield '1'
         yield '\n'
 }
+
+let rec gdc a b =
+    match a / b with
+    | 0 -> b
+    | _ -> gdc b (a / b)
