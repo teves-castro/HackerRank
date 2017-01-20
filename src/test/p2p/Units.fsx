@@ -19,6 +19,6 @@ let Fem = G * earthMass * moonMass / sq r
 let gEarth = G * earthMass / (sq earthRadius)
 let gMoon = G * moonMass / (sq moonRadius)
 
-let aEarth = Fg / earthMass
+let aEarth = Fem / earthMass
 
 let d = 0.5 * aEarth * 1.0<s^2>
