@@ -5,7 +5,7 @@ open FsCheck
 open FsCheck.Arb
 open StateMonad
 
-let config = { FsCheck.Config.Default with MaxTest = 100000 }
+let config = { FsCheck.Config.Default with MaxTest = 1000 }
 
 [<Tests>]
 let tests =
@@ -26,31 +26,19 @@ let tests =
                 return r
             } |> runS c = (a+b,a+b)
 
-        ftestList "monad Laws" [
-            testProperty "Left Identity" <| fun (x:int) f (s:int) ->
-                let left = (state { let! x' = state { return x } in return! f x' } |> runS s) 
-                let right = (state { return! f x } |> runS s)
-                if left <> right then printfn "%A = ? = %A" left right else printf ""
-                left = right
+        testList "monad Laws" [
+            testProperty "Left Identity" <| fun x f s ->
+                ((f x |> runS s) = (f x |> runS s)) ==>
+                (runS s (state { let! x' = state { return x } in return! f x' }) = runS s (state { return! f x }))
 
-            testProperty "Right Identity" <| fun x comp s ->
-                (state { let! x = comp in return x } |> runS s) = (state { return! comp } |> runS s)
+            testPropertyWithConfig config "Left identity" <| fun m is ->
+                runS is (state.Bind (m, state.Return)) = runS is m
 
-            testProperty "Associativity" <| fun comp f g s ->
-                let left = 
-                    state { 
-                        let! x = comp 
-                        let! y = f x
-                        return! g y 
-                    } |> runS s
-                let right = 
-                    state { 
-                        let! y = state { 
-                            let! x = comp
-                            return! f x
-                        }
-                        return! g y
-                    } |> runS s
-                left = right
+            testPropertyWithConfig config "Right identity" <| fun f x is ->
+                runS is (state.Bind (state.Return x, f)) = runS is (f x)
+
+            testPropertyWithConfig config "Associativity" <| fun f g m is x ->
+                (runS is (f x) = runS is (f x) && runS is (g x) = runS is (g x)) ==>
+                (runS is (state.Bind (state.Bind (m, f), g)) = runS is (state.Bind (m, (fun x -> state.Bind (f x, g)))))
         ]
     ]
