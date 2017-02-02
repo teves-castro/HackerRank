@@ -14,11 +14,11 @@ let jimAndTheSkyscrapers xs =
                   let l,h = min i j, max i j
                   xs.[l+1..h-1] |> Seq.exists (fun h -> h > xs.[i]) |> not)
 
-let solveJim hs =
-    // readInt () |> ignore
-    // let hs = readIntArray ()
-    printfn "%d" (hs |> jimAndTheSkyscrapers |> Seq.length)
+let solveJim () =
+    readInt () |> ignore
+    let hs = readIntArray ()
+    sprintf "%d" (hs |> jimAndTheSkyscrapers |> Seq.length) |> write
 [|
  "6";
  "1 1000 1"
-|] |> solveJim
+|] |> hacker solveJim
