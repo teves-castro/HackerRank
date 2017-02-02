@@ -1,15 +1,15 @@
 NUGET
   remote: https://www.nuget.org/api/v2
     Argu (3.2)
-    Expecto (3.1)
+    Expecto (3.2.1)
       Argu (>= 3.2)
       FSharp.Core (>= 3.1.2.5)
       Mono.Cecil (>= 0.9.6.4)
-    Expecto.FsCheck (3.1)
-      Expecto (>= 3.1)
+    Expecto.FsCheck (3.2.1)
+      Expecto (>= 3.2.1)
       FsCheck (>= 2.6.2)
       FSharp.Core (>= 3.1.2.5)
-    FAKE (4.48)
+    FAKE (4.50)
     FsCheck (2.7)
       FSharp.Core (>= 3.1.2.5)
     FSharp.Control.Reactive (3.5)
@@ -40,7 +40,7 @@ NUGET
       System.Reactive.Windows.Threading (>= 3.1.1) - framework: >= net45, winv4.5.1, wpav8.1
       System.Reactive.WindowsRuntime (>= 3.1.1) - framework: winv4.5.1, wpav8.1
     System.Reactive.Core (3.1.1) - framework: >= net45, >= netstandard10, winv4.5.1, wpav8.1
-      System.Reactive.Interfaces (>= 3.1.1) - framework: >= net45, >= netstandard10
+      System.Reactive.Interfaces (>= 3.1.1) - framework: >= net45, >= netstandard10, netcore10
     System.Reactive.Interfaces (3.1.1) - framework: >= net45, >= netstandard10
     System.Reactive.Linq (3.1.1)
       System.Reactive.Core (>= 3.1.1) - framework: >= net45, >= netstandard10

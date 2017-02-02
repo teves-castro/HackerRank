@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Hacker.fs" />
+    <Compile Include="Common.fs" />
     <Compile Include="Problems.fs" />
     <Compile Include="algorithms/BitManipulation.fs" />
     <Compile Include="algorithms/DynamicProgramming.fs" />
@@ -50,6 +51,7 @@
     <None Include="paket.references" />
     <Compile Include="p2p/StateMonad.fs" />
     <Compile Include="p2p/MaybeMonad.fs" />
+    <Compile Include="dataStructures/Advanced.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Choose>

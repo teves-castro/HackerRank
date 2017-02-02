@@ -55,6 +55,8 @@
     <Compile Include="p2p/Addition.spec.fs" />
     <Compile Include="p2p/StateMonad.spec.fs" />
     <Compile Include="p2p/MaybeMonad.spec.fs" />
+    <Compile Include="dataStructures/Advanced.spec.fs" />
+    <Compile Include="Common.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
