@@ -14,11 +14,20 @@ let jimAndTheSkyscrapers xs =
                   let l,h = min i j, max i j
                   xs.[l+1..h-1] |> Seq.exists (fun h -> h > xs.[i]) |> not)
 
+let jimAndTheSkyscrapers' xs = 
+  let withIndexes = xs |> Seq.mapi (fun i x -> i,x) |> Seq.sortBy snd
+  withIndexes
+    |> Seq.pairwise 
+    |> Seq.filter (fun ((_,x),(_,y)) -> x=y)
+    |> Seq.map (fun ((i,_),(j,_)) -> i,j)
+
 let solveJim () =
     readInt () |> ignore
     let hs = readIntArray ()
     sprintf "%d" (hs |> jimAndTheSkyscrapers |> Seq.length) |> write
-[|
- "6";
- "1 1000 1"
-|] |> hacker solveJim
+// [|
+//  "6";
+//  "1 1000 1"
+// |] |> hacker solveJim
+
+// "1 1000 1" => (0,1) (1,1000) (2,1) => (0,1) (2,1) (1,1000)
